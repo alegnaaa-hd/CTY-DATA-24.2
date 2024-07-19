@@ -1,3 +1,5 @@
+from colors import *
+
 # Initialize a 2D array for the Connect 4 board
 rows = 6  # Connect 4 has 6 rows
 columns = 7  # Connect 4 has 7 columns
@@ -7,6 +9,7 @@ player1_sign = "R"
 player2_sign = "A"
 # Create the board as a list of lists, initially filled with empty spaces
 board = [[' ' for _ in range(columns)] for _ in range(rows)]
+
 
 # ANSI escape codes for colors
 RED = '\033[91m'
@@ -72,14 +75,11 @@ def play_game():
         
     global player1_sign
     global player2_sign
-
-    player1_sign = str(input("Enter one character to represent player 1: "))
-    player2_sign = str(input("Enter one character to represent player 2: "))
-    player1_sign = player1_sign.upper()
-    player1_sign = player1_sign[0]
-    player2_sign = player2_sign.upper()
-    player2_sign = player2_sign[0]
-        
+    ((player1_sign,player1_color),(player2_sign,player2_color)) = get_user_settings()
+    global BLUE
+    global RED 
+    BLUE = player1_color
+    RED = player2_color
     pieces = [player1_sign, player2_sign]  # X for Player 1, O for Player 2
     print_board(board)
 
