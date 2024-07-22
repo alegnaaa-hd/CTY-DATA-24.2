@@ -4,6 +4,7 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.textinput import TextInput
+import json
 import xrpl
 from xrpl.clients import JsonRpcClient
 from xrpl.models.requests import AccountTx, Tx
@@ -51,6 +52,8 @@ class AncestryApp(App):
         response = client.request(acct_tx)
         if response.is_successful():
             transactions = response.result["transactions"]
+            transaction_pretty = json.dumps(transactions, indent=2)
+            print("transactions[0:1]",transaction_pretty)
             if transactions:
                 latest_tx_hash = transactions[0]["tx"]["hash"]
                 self.tx_hash_label.text = f"Latest TX Hash: {latest_tx_hash}"
